@@ -1,0 +1,182 @@
+<html>
+    <meta name="viewport" content="width=device-width, initial-scale-1.0">
+    <head>
+        <title> Task Managment Dashboard </title>
+    </head>
+    <link rel="stylesheet" herf="css/style.css">
+    <body>
+        <header>
+            <div class="logo">
+                TaskFlow
+            </div>
+            <input
+            id="searchInput"
+            type="search-input"
+            type="search"
+            placeholder="search Task"
+            >
+            <div class="user-area">
+                <button id="notification">
+                 Icon 
+                </button>
+                <span class="username">
+                    Alex
+
+                </span>
+
+            </div>
+
+        </header>
+        <div class="app-container">
+            <aside class="sidebar">
+                <button id="addTaskbtn" class="add-task-btn">
+                + New Task
+                </button>
+                <nav class="sidebar-nav">
+                    <ul>
+                        <li> Dashboard</li>
+                        <li>My Task</li>
+                        <li>Categories</li>
+                        <li>Statistics</li>
+                        <li>settings</li>
+                    </ul>
+
+                </nav>
+            </aside>
+            <main>
+                <section class="dashboard">
+                <article class="start-card">
+                    <h3>Total Tasks </h3>
+                    <p id ="total task">
+                        0
+                    </p>
+                </article>
+
+                 <article class="start-card">
+                    <h3>Completed </h3>
+                    <p id="Completedtasks">0</p>
+                </article>
+
+
+                 <article class="start-card">
+                    <h3>In progress</h3>
+                    <p id="progresstasks">0</p>
+                </article>
+
+                <article class="start-card">
+                    <h3>Overdue</h3>
+                    <p id="Overduetasks">0</p>
+                </article>
+
+                <artical class="start-card">
+                    <h3>High Priority</h3>
+                <p id="highpriortytasks">0</p>
+                </artical>
+
+            </section>
+
+
+            <section class="filters">
+                <select id="Categoryfilter">
+                    <option value="all">
+                        All Category
+                    </option>
+
+               
+
+             
+                    <option value="work">
+                       work
+                    </option>
+
+
+                     <option value="study">
+                       study
+                    </option>
+                
+
+
+                </select>
+
+                <select id="Priorityfilter">
+
+                      <option value="all">
+                        All Priority
+                    </option>
+
+
+                      <option value="High">
+                        High
+                    </option>
+
+
+
+                      <option value="medium">
+                        medium
+                    </option>
+
+
+
+                      <option value="low">
+                        low
+                    </option>
+
+                </select>
+                </section>
+
+
+
+            <section class="kanban">
+                <div class="column">
+                    <h2>
+                        To Do
+                    </h2>
+                   <div id="todotask" class="tasks">
+
+                   </div>
+                </div>
+                <div id="progresstasks" class="column">
+                    <h2>In progress</h2>
+
+                    <div id="progresstasks" class="tasks">
+
+                    </div>
+
+                    <div class="column">
+                        <h2>Done</h2>
+
+                        <div id="donetasks" class="tasks">
+
+                        
+                    </div>
+                </div>
+ 
+            </section>
+            </main>
+        </div>
+       
+        <div id="taskmodal" class="model">
+            <div class="model-content">
+                <h2>
+                    Task Details
+                </h2>
+
+                <input idd="tasktitle" placeholder="Task title">
+                <textarea id=" taskdescription" placeholder="Description"></textarea>
+
+                <button id="savetaskbtn">
+                    save
+                </button>
+                <button id="closemodalbtn">
+                    cancel
+                </button>
+            </div>
+        </div>
+
+         <footer>
+            <p> @copy 2026 TaskFlow</p>
+        </footer>
+
+        <script src="js/app.js"></script>
+    </body>
+</html>
