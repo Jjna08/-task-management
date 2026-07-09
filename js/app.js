@@ -1,3 +1,5 @@
+tasks = getTasks();
+
 console.log(tasks);
 
 
@@ -49,7 +51,40 @@ closeModalBtn.addEventListener("click", closeModal);
 
 function addTask(){
 
-    const newTask = {
+    
+
+        if (taskTitle.value.trim() === ""){
+
+            alert("task title is required");
+
+            return;
+
+        }
+
+        if(taskDescription.value.trim() === ""){
+            alert("task description is required");
+
+            return;
+        }
+
+        if(taskDueDate.value === " "){
+
+            alert("Due date is required");
+            return;
+
+        }
+
+        const selectedDate=new Date(taskDueDate.value);
+        const today=new Date();
+
+        if(selectedDate<today){
+            alert("invalid date");
+            return;
+
+        }
+
+
+        const newTask = {
 
         id: Date.now(),
 
@@ -70,8 +105,8 @@ function addTask(){
 
     tasks.push(newTask);
 
+    saveTasks(tasks);
 
-    console.log(tasks);
 
 
     renderTasks();
@@ -196,6 +231,8 @@ function completeTask(id){
 
         task.completed = true;
 
+        saveTasks(tasks);
+
     }
 
 
@@ -214,6 +251,8 @@ function deleteTask(id){
 
 
     tasks = tasks.filter(task => task.id !== id);
+
+    saveTasks(tasks);
 
 
     renderTasks();
