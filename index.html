@@ -1,182 +1,198 @@
-<html>
-    <meta name="viewport" content="width=device-width, initial-scale-1.0">
-    <head>
-        <title> Task Managment Dashboard </title>
-    </head>
-    <link rel="stylesheet" herf="css/style.css">
-    <body>
-        <header>
-            <div class="logo">
-                TaskFlow
-            </div>
-            <input
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Management Dashboard</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">
+            TaskFlow
+        </div>
+
+        <input
             id="searchInput"
-            type="search-input"
             type="search"
-            placeholder="search Task"
-            >
-            <div class="user-area">
-                <button id="notification">
-                 Icon 
-                </button>
-                <span class="username">
-                    Alex
+            placeholder="Search Task">
 
-                </span>
+        <div class="user-area">
+            <button id="notificationBtn">
+                Icon
+            </button>
 
-            </div>
+            <span class="username">
+                Alex
+            </span>
+        </div>
+    </header>
 
-        </header>
-        <div class="app-container">
-            <aside class="sidebar">
-                <button id="addTaskbtn" class="add-task-btn">
+    <div class="app-container">
+
+       
+        <aside class="sidebar">
+
+            <button id="addTaskBtn" class="add-task-btn">
                 + New Task
-                </button>
-                <nav class="sidebar-nav">
-                    <ul>
-                        <li> Dashboard</li>
-                        <li>My Task</li>
-                        <li>Categories</li>
-                        <li>Statistics</li>
-                        <li>settings</li>
-                    </ul>
+            </button>
 
-                </nav>
-            </aside>
-            <main>
-                <section class="dashboard">
-                <article class="start-card">
-                    <h3>Total Tasks </h3>
-                    <p id ="total task">
-                        0
-                    </p>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li>Dashboard</li>
+                    <li>My Tasks</li>
+                    <li>Categories</li>
+                    <li>Statistics</li>
+                    <li>Settings</li>
+                </ul>
+            </nav>
+
+        </aside>
+
+      
+        <main>
+
+            
+            <section class="dashboard">
+
+                <article class="stat-card">
+                    <h3>Total Tasks</h3>
+                    <p id="totalTasks">0</p>
                 </article>
 
-                 <article class="start-card">
-                    <h3>Completed </h3>
-                    <p id="Completedtasks">0</p>
+                <article class="stat-card">
+                    <h3>Completed</h3>
+                    <p id="completedTasks">0</p>
                 </article>
 
-
-                 <article class="start-card">
-                    <h3>In progress</h3>
-                    <p id="progresstasks">0</p>
+                <article class="stat-card">
+                    <h3>In Progress</h3>
+                    <p id="progressTasks">0</p>
                 </article>
 
-                <article class="start-card">
+                <article class="stat-card">
                     <h3>Overdue</h3>
-                    <p id="Overduetasks">0</p>
+                    <p id="overdueTasks">0</p>
                 </article>
 
-                <artical class="start-card">
+                <article class="stat-card">
                     <h3>High Priority</h3>
-                <p id="highpriortytasks">0</p>
-                </artical>
+                    <p id="highPriorityTasks">0</p>
+                </article>
 
             </section>
 
-
+          
             <section class="filters">
-                <select id="Categoryfilter">
-                    <option value="all">
-                        All Category
-                    </option>
 
-               
+                <select id="categoryFilter">
+                    <option value="all">All Categories</option>
+                    <option value="work">Work</option>
+                    <option value="study">Study</option>
+                </select>
 
-             
-                    <option value="work">
-                       work
-                    </option>
+                <select id="priorityFilter">
+                    <option value="all">All Priorities</option>
+                    <option value="high">High</option>
+                    <option value="medium">Medium</option>
+                    <option value="low">Low</option>
+                </select>
+
+            </section>
+
+          
+            <section class="kanban">
+
+                <div class="column">
+                    <h2>To Do</h2>
+
+                    <div id="todoTasks" class="tasks">
+
+                    </div>
+                </div>
+
+                <div class="column">
+                    <h2>In Progress</h2>
+
+                    <div id="inProgressTasks" class="tasks">
+
+                    </div>
+                </div>
+
+                <div class="column">
+                    <h2>Done</h2>
+
+                    <div id="doneTasks" class="tasks">
+
+                    </div>
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
 
 
-                     <option value="study">
-                       study
-                    </option>
+    <div id="taskModal" class="modal">
+
+        <div class="modal-content">
+
+            <h2>Task Details</h2>
+
+            <input
+                id="taskTitle"
+                name="taskTitle"
+                type="text"
+                placeholder="Task Title">
+
+            <textarea
+                id="taskDescription"
+                name="taskDescription"
+                placeholder="Description"></textarea>
+
+
+                <select id="taskCategory">
+                    <option value="study">study</option>
+                    <option value="work">work</option>
+                </select>
+
+                <select id="taskPriority">
+                    <option value="high">High</option>
+                    <option value="medium">Medium</option>
+                    <option value="low">Low</option>
+                </select>
+
+                <input 
+                id="taskDueDate"
+                type="date">
                 
 
+            <button id="saveTaskBtn">
+                Save
+            </button>
 
-                </select>
+            <button id="closeModalBtn">
+                Cancel
+            </button>
 
-                <select id="Priorityfilter">
-
-                      <option value="all">
-                        All Priority
-                    </option>
-
-
-                      <option value="High">
-                        High
-                    </option>
-
-
-
-                      <option value="medium">
-                        medium
-                    </option>
-
-
-
-                      <option value="low">
-                        low
-                    </option>
-
-                </select>
-                </section>
-
-
-
-            <section class="kanban">
-                <div class="column">
-                    <h2>
-                        To Do
-                    </h2>
-                   <div id="todotask" class="tasks">
-
-                   </div>
-                </div>
-                <div id="progresstasks" class="column">
-                    <h2>In progress</h2>
-
-                    <div id="progresstasks" class="tasks">
-
-                    </div>
-
-                    <div class="column">
-                        <h2>Done</h2>
-
-                        <div id="donetasks" class="tasks">
-
-                        
-                    </div>
-                </div>
- 
-            </section>
-            </main>
-        </div>
-       
-        <div id="taskmodal" class="model">
-            <div class="model-content">
-                <h2>
-                    Task Details
-                </h2>
-
-                <input idd="tasktitle" placeholder="Task title">
-                <textarea id=" taskdescription" placeholder="Description"></textarea>
-
-                <button id="savetaskbtn">
-                    save
-                </button>
-                <button id="closemodalbtn">
-                    cancel
-                </button>
-            </div>
         </div>
 
-         <footer>
-            <p> @copy 2026 TaskFlow</p>
-        </footer>
+    </div>
 
-        <script src="js/app.js"></script>
-    </body>
+    <footer>
+        <p>&copy; 2026 TaskFlow</p>
+    </footer>
+
+<script src="js/modal.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/app.js"></script>
+
+
+</body>
+
 </html>
