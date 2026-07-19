@@ -11,182 +11,320 @@
 
 <body>
 
-    <header>
-        <div class="logo">
-            TaskFlow
-        </div>
+<header>
+    <div class="logo">
+        TaskFlow
+    </div>
+
+    <input
+        id="searchInput"
+        type="search"
+        placeholder="Search Task">
+
+    <div class="user-area">
+        <button id="notificationBtn">
+            Icon
+        </button>
+
+        <span class="username">
+            Alex
+        </span>
+    </div>
+</header>
+
+
+<div class="app-container">
+
+    <aside class="sidebar">
+
+        <button id="addTaskBtn" class="add-task-btn">
+            + New Task
+        </button>
+
+        <nav class="sidebar-nav">
+            <ul>
+                <li>Dashboard</li>
+                <li>My Tasks</li>
+                <li>Categories</li>
+                <li>Statistics</li>
+                <li>Settings</li>
+            </ul>
+        </nav>
+
+    </aside>
+
+
+    <main>
+
+
+        <section class="dashboard">
+
+            <article class="stat-card">
+                <h3>Total Tasks</h3>
+                <p id="totalTasks">0</p>
+            </article>
+
+
+            <article class="stat-card">
+                <h3>Completed</h3>
+                <p id="completedTasks">0</p>
+            </article>
+
+
+            <article class="stat-card">
+                <h3>In Progress</h3>
+                <p id="progressTasks">0</p>
+            </article>
+
+
+            <article class="stat-card">
+                <h3>Overdue</h3>
+                <p id="overdueTasks">0</p>
+            </article>
+
+
+            <article class="stat-card">
+                <h3>High Priority</h3>
+                <p id="highPriorityTasks">0</p>
+            </article>
+
+
+        </section>
+
+
+
+        <section class="filters">
+
+            <select id="categoryFilter">
+
+                <option value="all">
+                    All Categories
+                </option>
+
+                <option value="work">
+                    Work
+                </option>
+
+                <option value="study">
+                    Study
+                </option>
+
+            </select>
+
+
+
+            <select id="priorityFilter">
+
+                <option value="all">
+                    All Priorities
+                </option>
+
+                <option value="high">
+                    High
+                </option>
+
+                <option value="medium">
+                    Medium
+                </option>
+
+                <option value="low">
+                    Low
+                </option>
+
+            </select>
+
+
+        </section>
+
+
+
+
+        <section class="kanban">
+
+
+            <div class="column">
+
+                <h2>
+                    To Do
+                </h2>
+
+                <div id="todoTasks" class="tasks">
+
+                </div>
+
+            </div>
+
+
+
+
+            <div class="column">
+
+                <h2>
+                    In Progress
+                </h2>
+
+                <div id="inProgressTasks" class="tasks">
+
+                </div>
+
+            </div>
+
+
+
+
+            <div class="column">
+
+                <h2>
+                    Done
+                </h2>
+
+                <div id="doneTasks" class="tasks">
+
+                </div>
+
+            </div>
+
+
+
+        </section>
+
+
+    </main>
+
+
+</div>
+
+
+
+
+
+<div id="taskModal" class="modal">
+
+
+    <div class="modal-content">
+
+
+        <h2>
+            Task Details
+        </h2>
+
+
 
         <input
-            id="searchInput"
-            type="search"
-            placeholder="Search Task">
+            id="taskTitle"
+            name="taskTitle"
+            type="text"
+            placeholder="Task Title">
 
-        <div class="user-area">
-            <button id="notificationBtn">
-                Icon
-            </button>
 
-            <span class="username">
-                Alex
-            </span>
-        </div>
-    </header>
 
-    <div class="app-container">
+        <textarea
+            id="taskDescription"
+            name="taskDescription"
+            placeholder="Description"></textarea>
 
-       
-        <aside class="sidebar">
 
-            <button id="addTaskBtn" class="add-task-btn">
-                + New Task
-            </button>
 
-            <nav class="sidebar-nav">
-                <ul>
-                    <li>Dashboard</li>
-                    <li>My Tasks</li>
-                    <li>Categories</li>
-                    <li>Statistics</li>
-                    <li>Settings</li>
-                </ul>
-            </nav>
 
-        </aside>
+        <select id="taskCategory">
 
-      
-        <main>
+            <option value="study">
+                Study
+            </option>
 
-            
-            <section class="dashboard">
+            <option value="work">
+                Work
+            </option>
 
-                <article class="stat-card">
-                    <h3>Total Tasks</h3>
-                    <p id="totalTasks">0</p>
-                </article>
+        </select>
 
-                <article class="stat-card">
-                    <h3>Completed</h3>
-                    <p id="completedTasks">0</p>
-                </article>
 
-                <article class="stat-card">
-                    <h3>In Progress</h3>
-                    <p id="progressTasks">0</p>
-                </article>
 
-                <article class="stat-card">
-                    <h3>Overdue</h3>
-                    <p id="overdueTasks">0</p>
-                </article>
 
-                <article class="stat-card">
-                    <h3>High Priority</h3>
-                    <p id="highPriorityTasks">0</p>
-                </article>
+        <select id="taskPriority">
 
-            </section>
 
-          
-            <section class="filters">
+            <option value="high">
+                High
+            </option>
 
-                <select id="categoryFilter">
-                    <option value="all">All Categories</option>
-                    <option value="work">Work</option>
-                    <option value="study">Study</option>
-                </select>
 
-                <select id="priorityFilter">
-                    <option value="all">All Priorities</option>
-                    <option value="high">High</option>
-                    <option value="medium">Medium</option>
-                    <option value="low">Low</option>
-                </select>
+            <option value="medium">
+                Medium
+            </option>
 
-            </section>
 
-          
-            <section class="kanban">
+            <option value="low">
+                Low
+            </option>
 
-                <div class="column">
-                    <h2>To Do</h2>
 
-                    <div id="todoTasks" class="tasks">
+        </select>
 
-                    </div>
-                </div>
 
-                <div class="column">
-                    <h2>In Progress</h2>
 
-                    <div id="inProgressTasks" class="tasks">
 
-                    </div>
-                </div>
+        <select id="taskStatus">
 
-                <div class="column">
-                    <h2>Done</h2>
 
-                    <div id="doneTasks" class="tasks">
+            <option value="todo">
+                To Do
+            </option>
 
-                    </div>
-                </div>
 
-            </section>
+            <option value="progress">
+                In Progress
+            </option>
 
-        </main>
+
+            <option value="done">
+                Done
+            </option>
+
+
+        </select>
+
+
+
+
+
+        <input
+            id="taskDueDate"
+            type="date">
+
+
+
+
+
+        <button id="saveTaskBtn">
+            Save
+        </button>
+
+
+
+        <button id="closeModalBtn">
+            Cancel
+        </button>
+
 
     </div>
 
 
-    <div id="taskModal" class="modal">
-
-        <div class="modal-content">
-
-            <h2>Task Details</h2>
-
-            <input
-                id="taskTitle"
-                name="taskTitle"
-                type="text"
-                placeholder="Task Title">
-
-            <textarea
-                id="taskDescription"
-                name="taskDescription"
-                placeholder="Description"></textarea>
+</div>
 
 
-                <select id="taskCategory">
-                    <option value="study">study</option>
-                    <option value="work">work</option>
-                </select>
-
-                <select id="taskPriority">
-                    <option value="high">High</option>
-                    <option value="medium">Medium</option>
-                    <option value="low">Low</option>
-                </select>
-
-                <input 
-                id="taskDueDate"
-                type="date">
 
 
-            <button id="saveTaskBtn">
-                Save
-            </button>
+<footer>
 
-            <button id="closeModalBtn">
-                Cancel
-            </button>
+    <p>
+        &copy; 2026 TaskFlow
+    </p>
 
-        </div>
+</footer>
 
-    </div>
 
-    <footer>
-        <p>&copy; 2026 TaskFlow</p>
-    </footer>
+
 
 <script src="js/modal.js"></script>
 <script src="js/storage.js"></script>
