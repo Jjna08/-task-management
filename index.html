@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Task Management Dashboard</title>
 
-    <link rel="stylesheet" href="css/style.css">
+  
+   <link rel="stylesheet" href="css/style.css">
+   <link rel="stylesheet" href="css/responsive.css">
 </head>
 
 <body>
@@ -20,12 +22,11 @@
         id="searchInput"
         type="search"
         placeholder="Search Task">
+<button id="notificationBtn">
+    🔔
+</button>
 
-    <div class="user-area">
-        <button id="notificationBtn">
-            Icon
-        </button>
-
+<img src="assets/images/avatar.png" class="avatar">
         <span class="username">
             Alex
         </span>
@@ -349,6 +350,47 @@
             <strong>Due Date:</strong>
             <span id="detailsDate"></span>
         </p>
+
+
+    </div>
+
+</div>
+
+<div id="detailsModal" class="modal">
+
+    <div class="modal-content">
+
+        <h2 id="detailsTitle"></h2>
+
+        <p>
+            Description:
+            <span id="detailsDescription"></span>
+        </p>
+
+        <p>
+            Category:
+            <span id="detailsCategory"></span>
+        </p>
+
+        <p>
+            Priority:
+            <span id="detailsPriority"></span>
+        </p>
+
+        <p>
+            Status:
+            <span id="detailsStatus"></span>
+        </p>
+
+        <p>
+            Due Date:
+            <span id="detailsDate"></span>
+        </p>
+
+
+        <button id="closeDetailsModal">
+            Close
+        </button>
 
 
     </div>

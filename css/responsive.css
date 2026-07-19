@@ -1,0 +1,86 @@
+@media(max-width:900px){
+
+header{
+
+    flex-direction:column;
+
+    gap:15px;
+
+    height:auto;
+
+    padding:20px;
+
+}
+
+#searchInput{
+
+    width:100%;
+
+}
+
+.app-container{
+
+    flex-direction:column;
+
+}
+
+.sidebar{
+
+    width:100%;
+
+}
+
+.dashboard{
+
+    grid-template-columns:repeat(2,1fr);
+
+}
+
+.kanban{
+
+    grid-template-columns:1fr;
+
+}
+
+}
+
+
+@media(max-width:600px){
+
+.dashboard{
+
+    grid-template-columns:1fr;
+
+}
+
+.filters{
+
+    flex-direction:column;
+
+}
+
+.filters select{
+
+    width:100%;
+
+}
+
+.modal-content{
+
+    width:92%;
+
+}
+
+.details-content{
+
+    width:92%;
+
+}
+
+.task-card button{
+
+    width:100%;
+
+}
+
+}
