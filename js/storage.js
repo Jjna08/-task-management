@@ -1,39 +1,23 @@
-const STORAGE_KEY = "tasks";
+const STORAGE_KEY = "taskflow_tasks";
 
+function getTasks() {
 
-function saveTasks(tasks){
+    const raw = localStorage.getItem(STORAGE_KEY);
 
-    localStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify(tasks)
-    );
+    if (!raw) {
+        return [];
+    }
+
+    try {
+        return JSON.parse(raw);
+    } catch (e) {
+        return [];
+    }
 
 }
 
+function saveTasks(tasks) {
 
-
-function getTasks(){
-
-    const savedTasks = localStorage.getItem(STORAGE_KEY);
-
-
-    if(savedTasks){
-
-        return JSON.parse(savedTasks);
-
-    }
-
-
-    return [
-        {
-            id: 1,
-            title: "Learn HTML",
-            description: "Finish the homepage",
-            category: "study",
-            priority: "high",
-            dueDate: "2026-07-10",
-            completed: false
-        }
-    ];
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
 
 }

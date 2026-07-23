@@ -1,86 +1,288 @@
-@media(max-width:900px){
+@media (max-width:1024px){
 
-header{
+    .kanban{
+        grid-template-columns:1fr;
+    }
 
-    flex-direction:column;
+    .dashboard{
+        grid-template-columns:repeat(2,1fr);
+    }
 
-    gap:15px;
+    .sidebar{
+        width:200px;
+    }
 
-    height:auto;
-
-    padding:20px;
-
-}
-
-#searchInput{
-
-    width:100%;
-
-}
-
-.app-container{
-
-    flex-direction:column;
+    .search-wrap{
+        width:220px;
+    }
 
 }
 
-.sidebar{
+@media (max-width:900px){
 
-    width:100%;
+    header{
+
+        flex-direction:column;
+        height:auto;
+        gap:15px;
+        padding:20px;
+
+    }
+
+    .header-left{
+
+        flex-direction:column;
+        width:100%;
+        gap:15px;
+
+    }
+
+    .search-wrap{
+
+        width:100%;
+
+    }
+
+    .user-area{
+
+        width:100%;
+        justify-content:space-between;
+
+    }
+
+    .app-container{
+
+        flex-direction:column;
+
+    }
+
+    .sidebar{
+
+        width:100%;
+        padding:20px;
+        border-right:none;
+        border-bottom:1px solid #eef0f5;
+
+    }
+
+    .workspace-switcher{
+
+        margin-bottom:14px;
+
+    }
+
+    .sidebar-nav ul{
+
+        display:flex;
+        justify-content:space-between;
+        flex-wrap:wrap;
+        gap:10px;
+
+    }
+
+    .sidebar-nav li{
+
+        flex:1;
+        justify-content:center;
+        text-align:center;
+
+    }
+
+    main{
+
+        padding:15px;
+
+    }
+
+    .dashboard{
+
+        grid-template-columns:1fr 1fr;
+
+    }
+
+    .filters{
+
+        flex-wrap:wrap;
+
+    }
+
+    .filters select{
+
+        flex:1;
+        min-width:140px;
+
+    }
+
+    .filters-spacer{
+
+        display:none;
+
+    }
+
+    .manage-columns-btn{
+
+        width:100%;
+
+    }
+
+    .kanban{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .column{
+
+        min-height:auto;
+
+    }
 
 }
 
-.dashboard{
+@media (max-width:600px){
 
-    grid-template-columns:repeat(2,1fr);
+    .logo{
+
+        font-size:20px;
+
+    }
+
+    .user-area{
+
+        width:100%;
+        justify-content:space-between;
+
+    }
+
+    .username{
+
+        display:none;
+
+    }
+
+    .modal-content{
+
+        width:95%;
+        padding:20px;
+
+    }
+
+    .field-row{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .details-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .task-actions button{
+
+        width:26px;
+        height:26px;
+
+    }
+
+    .stat-card p{
+
+        font-size:24px;
+
+    }
 
 }
 
-.kanban{
+@media (max-width:480px){
 
-    grid-template-columns:1fr;
+    body{
 
-}
+        font-size:14px;
 
-}
+    }
 
+    header{
 
-@media(max-width:600px){
+        padding:15px;
 
-.dashboard{
+    }
 
-    grid-template-columns:1fr;
+    .logo{
 
-}
+        font-size:19px;
 
-.filters{
+    }
 
-    flex-direction:column;
+    .sidebar{
 
-}
+        padding:15px;
 
-.filters select{
+    }
 
-    width:100%;
+    .sidebar-nav li{
 
-}
+        font-size:12px;
 
-.modal-content{
+        padding:10px 6px;
 
-    width:92%;
+    }
 
-}
+    .sidebar-nav li i{
 
-.details-content{
+        margin-right:0;
 
-    width:92%;
+    }
 
-}
+    .dashboard{
 
-.task-card button{
+        grid-template-columns:1fr 1fr;
+        gap:12px;
 
-    width:100%;
+    }
 
-}
+    .stat-card{
+
+        padding:14px;
+
+    }
+
+    .stat-icon{
+
+        width:34px;
+        height:34px;
+        font-size:15px;
+
+    }
+
+    .column{
+
+        padding:15px;
+
+    }
+
+    .task-card{
+
+        padding:12px;
+
+    }
+
+    .task-card h3{
+
+        font-size:14px;
+
+    }
+
+    .task-card p.task-desc{
+
+        font-size:12px;
+
+    }
+
+    .modal-content{
+
+        border-radius:15px;
+
+    }
 
 }

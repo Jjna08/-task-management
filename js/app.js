@@ -2,10 +2,14 @@ let tasks = getTasks();
 
 let editingTaskId = null;
 
+let draggedTaskId = null;
+
+let presetStatus = "todo";
 
 const addTaskBtn = document.getElementById("addTaskBtn");
 const saveTaskBtn = document.getElementById("saveTaskBtn");
 const closeModalBtn = document.getElementById("closeModalBtn");
+const closeModalBtn2 = document.getElementById("closeModalBtn2");
 
 
 const taskTitle = document.getElementById("taskTitle");
@@ -14,6 +18,7 @@ const taskCategory = document.getElementById("taskCategory");
 const taskPriority = document.getElementById("taskPriority");
 const taskStatus = document.getElementById("taskStatus");
 const taskDueDate = document.getElementById("taskDueDate");
+const taskAssignee = document.getElementById("taskAssignee");
 
 
 const searchInput = document.getElementById("searchInput");
@@ -31,6 +36,10 @@ const completedTasks = document.getElementById("completedTasks");
 const progressTasks = document.getElementById("progressTasks");
 const overdueTasks = document.getElementById("overdueTasks");
 const highPriorityTasks = document.getElementById("highPriorityTasks");
+
+const todoCount = document.getElementById("todoCount");
+const progressCount = document.getElementById("progressCount");
+const doneCount = document.getElementById("doneCount");
 
 
 // Details Modal
@@ -51,11 +60,25 @@ const detailsStatus = document.getElementById("detailsStatus");
 
 const detailsDate = document.getElementById("detailsDate");
 
+const detailsAssignee = document.getElementById("detailsAssignee");
 
 
-addTaskBtn.addEventListener("click", openModal);
+
+addTaskBtn.addEventListener("click", () => {
+
+    editingTaskId = null;
+
+    clearInputs();
+
+    taskStatus.value = "todo";
+
+    openModal();
+
+});
 
 closeModalBtn.addEventListener("click", closeModal);
+
+closeModalBtn2.addEventListener("click", closeModal);
 
 saveTaskBtn.addEventListener("click", addTask);
 
@@ -69,6 +92,40 @@ priorityFilter.addEventListener("change", applyFilters);
 
 closeDetailsModal.addEventListener("click", closeDetails);
 
+
+document.querySelectorAll(".column").forEach(column => {
+
+    column.addEventListener("dragover", (e) => {
+
+        e.preventDefault();
+
+        column.classList.add("drag-over");
+
+    });
+
+    column.addEventListener("dragleave", () => {
+
+        column.classList.remove("drag-over");
+
+    });
+
+    column.addEventListener("drop", (e) => {
+
+        e.preventDefault();
+
+        column.classList.remove("drag-over");
+
+        if(draggedTaskId !== null){
+
+            changeStatus(draggedTaskId, column.dataset.status);
+
+            draggedTaskId = null;
+
+        }
+
+    });
+
+});
 
 
 
@@ -117,11 +174,11 @@ function addTask(){
 
         dueDate: taskDueDate.value,
 
+        assignee: taskAssignee.value.trim() || "Alex Rivera",
+
         completed: taskStatus.value === "done"
 
     };
-
-
 
 
 
@@ -144,6 +201,8 @@ function addTask(){
         task.status = taskStatus.value;
 
         task.dueDate = taskDueDate.value;
+
+        task.assignee = taskAssignee.value.trim() || "Alex Rivera";
 
         task.completed = taskStatus.value === "done";
 
@@ -182,11 +241,7 @@ function addTask(){
 
 function editTask(id){
 
-
-    const task = tasks.find(
-        task => task.id === id
-    );
-
+    const task = tasks.find(task => task.id === id);
 
     if(!task){
         return;
@@ -198,18 +253,15 @@ function editTask(id){
 
 
     taskTitle.value = task.title;
-
     taskDescription.value = task.description;
 
     taskCategory.value = task.category;
-
     taskPriority.value = task.priority;
 
     taskStatus.value = task.status;
-
     taskDueDate.value = task.dueDate;
 
-
+    taskAssignee.value = task.assignee || "";
 
     openModal();
 
@@ -222,24 +274,84 @@ function editTask(id){
 
 function clearInputs(){
 
-
     taskTitle.value = "";
 
     taskDescription.value = "";
-
     taskCategory.value = "study";
 
     taskPriority.value = "high";
 
     taskStatus.value = "todo";
-
     taskDueDate.value = "";
+
+    taskAssignee.value = "";
 
 
 }
 
 
 
+function getInitials(name){
+
+    if(!name){
+        return "?";
+    }
+
+    const parts = name.trim().split(" ").filter(Boolean);
+
+    if(parts.length === 1){
+        return parts[0].substring(0,2).toUpperCase();
+    }
+
+    return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+
+}
+
+
+
+function categoryTagClass(category){
+
+    if(category === "study"){
+        return "tag--study";
+    }
+
+    if(category === "work"){
+        return "tag--work";
+    }
+
+    return "tag--default";
+
+}
+
+
+
+function priorityBadgeClass(priority){
+
+    if(priority === "high"){
+        return "badge--high";
+    }
+
+    if(priority === "medium"){
+        return "badge--medium";
+    }
+
+    return "badge--low";
+
+}
+
+
+
+function formatDueDate(dueDate){
+
+    if(!dueDate){
+        return "No date";
+    }
+
+    const date = new Date(dueDate);
+
+    return date.toLocaleDateString("en-US",{month:"short",day:"numeric"});
+
+}
 
 
 
@@ -263,39 +375,40 @@ function renderTasks(taskList = tasks){
 
         taskCard.className = "task-card";
 
+        taskCard.setAttribute("draggable","true");
+
+        taskCard.dataset.id = task.id;
+
 
 
         taskCard.innerHTML = `
 
 
-        <div onclick="showTaskDetails(${task.id})">
+        <div class="task-card-top">
 
+            <span class="tag ${categoryTagClass(task.category)}">${task.category}</span>
 
-            <h3>${task.title}</h3>
-
-            <p>${task.description}</p>
-
-            <p>
-                Category: ${task.category}
-            </p>
-
-            <p>
-                Priority: ${task.priority}
-            </p>
-
-            <p>
-                Due Date: ${task.dueDate}
-            </p>
-
+            <span class="badge ${priorityBadgeClass(task.priority)}">${task.priority}</span>
 
         </div>
 
 
+        <div onclick="showTaskDetails(${task.id})">
 
-        <button onclick="editTask(${task.id})">
-            Edit
-        </button>
+            <h3>${task.title}</h3>
 
+            <p class="task-desc">${task.description}</p>
+
+        </div>
+
+
+        <div class="task-card-footer">
+
+            <span class="due-date">📅 ${formatDueDate(task.dueDate)}</span>
+
+            <span class="avatar" style="width:26px;height:26px;font-size:11px;" title="${task.assignee || "Unassigned"}">${getInitials(task.assignee)}</span>
+
+        </div>
 
 
         <select onchange="changeStatus(${task.id},this.value)">
@@ -321,13 +434,32 @@ function renderTasks(taskList = tasks){
         </select>
 
 
+        <div class="task-actions">
 
-        <button onclick="deleteTask(${task.id})">
-            Delete
-        </button>
+            <button onclick="editTask(${task.id})">✎</button>
+
+            <button class="delete-btn" onclick="deleteTask(${task.id})">🗑</button>
+
+        </div>
 
 
         `;
+
+
+
+        taskCard.addEventListener("dragstart", () => {
+
+            draggedTaskId = task.id;
+
+            taskCard.classList.add("dragging");
+
+        });
+
+        taskCard.addEventListener("dragend", () => {
+
+            taskCard.classList.remove("dragging");
+
+        });
 
 
 
@@ -349,6 +481,13 @@ function renderTasks(taskList = tasks){
 
 
     });
+
+
+    todoCount.textContent = todoTasks.children.length;
+
+    progressCount.textContent = inProgressTasks.children.length;
+
+    doneCount.textContent = doneTasks.children.length;
 
 
 }
@@ -560,11 +699,17 @@ function showTaskDetails(id){
 
     detailsCategory.textContent = task.category;
 
+    detailsCategory.className = "tag " + categoryTagClass(task.category);
+
     detailsPriority.textContent = task.priority;
+
+    detailsPriority.className = "badge " + priorityBadgeClass(task.priority);
 
     detailsStatus.textContent = task.status;
 
     detailsDate.textContent = task.dueDate;
+
+    detailsAssignee.textContent = task.assignee || "Unassigned";
 
 
 
